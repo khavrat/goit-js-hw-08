@@ -27,3 +27,4 @@ function getSavedCurrentTime() {
 getSavedCurrentTime();
 
 player.setCurrentTime(currentStorageValue);
+
