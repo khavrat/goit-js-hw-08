@@ -7,7 +7,7 @@ const player = new Player(iframe);
 const STORAGE_KEY = 'videoplayer-current-time';
 let currentStorageValue = 0;
 
-player.on('timeupdate', throttle(playerOn, 1000));
+player.on('timeupdate', throttle(playerOn, 1000), true);
 
 function playerOn(e) {
   const currentTime = e.seconds;
