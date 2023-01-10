@@ -13,28 +13,41 @@ const formData = {
   email: '',
   message: '',
 };
+
 getSavedFormData();
 
 function onInputValue(e) {
-  formData[e.target.name] = e.target.value;
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(formData));
+  if (input.value || textarea.value) {
+    formData.email = input.value;
+    formData.message = textarea.value;
+    formData[e.target.name] = e.target.value;
+
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(formData));
+  }
 }
 
-function getSavedFormData(e) {
+function getSavedFormData() {
   const savedData = localStorage.getItem(STORAGE_KEY);
   const parsedData = JSON.parse(savedData);
-  if (savedData !== null) {
+  if (savedData) {
     input.value = parsedData.email;
     textarea.value = parsedData.message;
   }
 }
 
 function onFormSubmit(e) {
-  formData.email = input.value;
-  formData.message = textarea.value;
-  console.log(formData);
-
   e.preventDefault();
-  e.target.reset();
-  localStorage.removeItem(STORAGE_KEY);
+
+  if (!input.value || !textarea.value) {
+    alert('Both fields of the form should be filled in');
+  } else {
+    formData.email = input.value;
+    formData.message = textarea.value;
+    console.log(formData);
+
+    e.target.reset();
+    localStorage.removeItem(STORAGE_KEY);
+    formData.email = '';
+    formData.message = '';
+  }
 }
