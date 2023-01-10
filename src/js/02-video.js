@@ -26,5 +26,15 @@ function getSavedCurrentTime() {
 
 getSavedCurrentTime();
 
-player.setCurrentTime(currentStorageValue);
+player
+  .setCurrentTime(currentStorageValue)
+  .then(function (seconds) {})
+  .catch(function (error) {
+    switch (error.name) {
+      case 'RangeError':
+        break;
 
+      default:
+        break;
+    }
+  });
